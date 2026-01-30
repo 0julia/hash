@@ -6,76 +6,12 @@ using namespace std;
 
 void add(const char newfirst[100],const char newlast[100], int my_id, float my_gpa, Node* &head);
 void print(Node* next, Node* head);
-
-void round(float num, int dec){ //prints up to the 100ths place
-  if (dec==3){//if not a decimal...
-    cout<<int(num) << ".";//print then add the dot
-    round(num-int(num), 2);
-  }else if(dec > 0){//recursive part
-    num = num*10;//move the tenths place into the ones place
-    cout << int(num); //print the ones place
-    round((num-int(num)),dec-1); // delete the ones place and go onto the next decimal
-  }
-}
+void round(float num, int dec);
+void numerical(Node* head, Node* next);
+void average(Node* head, float sum, int pass);
+void remove(int del_id, Node*& head);
 
 
-//orders things by the ids
-void numerical(Node* head, Node* next){
-  if(head->getNext()==NULL || next == NULL){ //if at the end of the list, leave
-    return;
-  }
-  if (next->getNext() == NULL){ //if the compared value is at the end, move the 1st thing over
-    numerical(head->getNext(),head->getNext()->getNext());
-  }
-  if(head->getStudent()->getID() > next->getStudent()->getID()){ //swap 2 nodes
-    Student* temp_head = head->getStudent();
-    Student* temp_next = next->getStudent();
-    head->setStudent(temp_next);
-    next->setStudent(temp_head);
-    numerical(head, next->getNext());
-  } // move the next value over
-  if(next != NULL){
-    numerical(head, next->getNext());
-  }
-  
-}
-
-//goes through all th gpas and adds them then divides them by pass (# of students)
-void average(Node* head, float sum, int pass){
-  if(head->getNext() == NULL){
-    sum = sum + head->getStudent()->gpa;
-    float avg = sum/(pass+1);
-    cout<< "Average: ";
-    round(avg, 3); //rounds it to 2 decimals
-    cout << endl;
-    return;
-  }
-  sum = sum + head->getStudent()->gpa;//adds the next gpa to the sum
-  average(head->getNext(), sum, pass+1); //recursivness
-  
-}
-
-
-void remove(int del_id, Node*& head){
-  
-  if (head == NULL){
-    return;
-  }
-  
-  //IF YOU NEED TO DELETE 1ST THING
-  if(head->getStudent()->getID() == del_id){
-    Node* temp = head;
-    head = head->getNext();//Node* next_head = temp->getNext();
-    delete temp;
-    return; //head = next_head;
-  }
-   Node* next = head->getNext();   // store copy safely
-    remove(del_id, next);           // recurse
-    head->setNext(next);            // reconnect list
-
-  }
-
-///START MAIN FUNTION (sry theres some functions above and below main, I was inconsistant...)
 int main(){
   Node* head = NULL;
   cout << "Commands are:" << endl << "     ADD" << endl << "     PRINT" << endl << "     DELETE" << endl << "     QUIT" << endl << "     AVERAGE" << endl<<endl;
@@ -163,3 +99,71 @@ void print(Node* next, Node* head){
     print(next->getNext(), head);
   }
 }
+
+void round(float num, int dec){ //prints up to the 100ths place
+  if (dec==3){//if not a decimal...
+    cout<<int(num) << ".";//print then add the dot
+    round(num-int(num), 2);
+  }else if(dec > 0){//recursive part
+    num = num*10;//move the tenths place into the ones place
+    cout << int(num); //print the ones place
+    round((num-int(num)),dec-1); // delete the ones place and go onto the next decimal
+  }
+}
+
+
+//orders things by the ids
+void numerical(Node* head, Node* next){
+  if(head->getNext()==NULL || next == NULL){ //if at the end of the list, leave
+    return;
+  }
+  if (next->getNext() == NULL){ //if the compared value is at the end, move the 1st thing over
+    numerical(head->getNext(),head->getNext()->getNext());
+  }
+  if(head->getStudent()->getID() > next->getStudent()->getID()){ //swap 2 nodes
+    Student* temp_head = head->getStudent();
+    Student* temp_next = next->getStudent();
+    head->setStudent(temp_next);
+    next->setStudent(temp_head);
+    numerical(head, next->getNext());
+  } // move the next value over
+  if(next != NULL){
+    numerical(head, next->getNext());
+  }
+  
+}
+
+//goes through all th gpas and adds them then divides them by pass (# of students)
+void average(Node* head, float sum, int pass){
+  if(head->getNext() == NULL){
+    sum = sum + head->getStudent()->gpa;
+    float avg = sum/(pass+1);
+    cout<< "Average: ";
+    round(avg, 3); //rounds it to 2 decimals
+    cout << endl;
+    return;
+  }
+  sum = sum + head->getStudent()->gpa;//adds the next gpa to the sum
+  average(head->getNext(), sum, pass+1); //recursivness
+  
+}
+
+
+void remove(int del_id, Node*& head){
+  
+  if (head == NULL){
+    return;
+  }
+  
+  //IF YOU NEED TO DELETE 1ST THING
+  if(head->getStudent()->getID() == del_id){
+    Node* temp = head;
+    head = head->getNext();//Node* next_head = temp->getNext();
+    delete temp;
+    return; //head = next_head;
+  }
+   Node* next = head->getNext();   // store copy safely
+    remove(del_id, next);           // recurse
+    head->setNext(next);            // reconnect list
+
+  }
