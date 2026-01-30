@@ -7,6 +7,7 @@ Student::Student(){
 
 }
 Student::~Student(){
+  //delete[] m_firstname;
 }
 
 

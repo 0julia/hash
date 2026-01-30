@@ -55,7 +55,7 @@ int main(){
     delete temp;
   }
   head = NULL;
-  cout << "Aborted";
+  //cout << "Aborted";
 }
 
 //adding student info to node
@@ -133,9 +133,13 @@ void numerical(Node* head, Node* next){
   
 }
 
+
 //goes through all th gpas and adds them then divides them by pass (# of students)
 void average(Node* head, float sum, int pass){
-  if(head->getNext() == NULL){
+  if(head == NULL && pass == 0){
+    cout << "There are no students in the list" << endl;
+    return;
+  } else if(head->getNext() == NULL){
     sum = sum + head->getStudent()->gpa;
     float avg = sum/(pass+1);
     cout<< "Average: ";
