@@ -2,7 +2,7 @@
 #define HASH_H
 #include <iostream>
 #include "Student.h"
-#include "node,h"
+#include "node.h"
 
 using namespace std;
 
@@ -16,6 +16,6 @@ public:
   void addNode(Student* s);
   Student* find(int id);
   
-private:
-}
+  //private:
+};
 

@@ -7,14 +7,14 @@ using namespace std;
 void add(const char newfirst[100],const char newlast[100], int my_id, float my_gpa, Node* &head);
 void print(Node* next, Node* head);
 void round(float num, int dec);
-void numerical(Node* head, Node* next);
-void average(Node* head, float sum, int pass);
+//void numerical(Node* head, Node* next);
+//void average(Node* head, float sum, int pass);
 void remove(int del_id, Node*& head);
 
 
 int main(){
   Node* head = NULL;
-  cout << "Commands are:" << endl << "     ADD" << endl << "     PRINT" << endl << "     DELETE" << endl << "     QUIT" << endl << "     AVERAGE" << endl<<endl;
+  cout << "Commands are:" << endl << "     ADD" << endl << "     PRINT" << endl << "     DELETE" << endl << "     QUIT" << endl << endl;//"     AVERAGE" << endl<<endl;
   char command[100];
   do{
   cout << "What would you like to do? ";
@@ -33,11 +33,11 @@ int main(){
     cout << "What's " << f_name << "'s GPA? ";
     cin >> grade;
     add(f_name, l_name,identify, grade, head);
-    numerical(head, head);
+    //numerical(head, head);
   }else if(strcmp(command, "PRINT")==0){
     print(head,head);
-  }else if(strcmp(command, "AVERAGE")==0){
-    average(head,0,0);
+    //}else if(strcmp(command, "AVERAGE")==0){
+    //average(head,0,0);
   }else if(strcmp(command, "DELETE")==0){
     int del_id;
     cout<<"What is the ID of the student you would like to delete? ";
@@ -111,7 +111,7 @@ void round(float num, int dec){ //prints up to the 100ths place
   }
 }
 
-
+/*
 //orders things by the ids
 void numerical(Node* head, Node* next){
   if(head->getNext()==NULL || next == NULL){ //if at the end of the list, leave
@@ -134,6 +134,7 @@ void numerical(Node* head, Node* next){
 }
 
 
+/*
 //goes through all th gpas and adds them then divides them by pass (# of students)
 void average(Node* head, float sum, int pass){
   if(head == NULL && pass == 0){
@@ -152,6 +153,7 @@ void average(Node* head, float sum, int pass){
   
 }
 
+*/
 
 void remove(int del_id, Node*& head){
   
