@@ -10,12 +10,15 @@ using namespace std;
 class hash{
   //Public constructor, destructor, and useful functions
 public:
-  hash(int hashlen=100);
+  hash(int whashlen);
   ~hash();
-  //  int hashlen = 100;
   void addNode(Student* s);
   Student* find(int id);
   
-  //private:
+private:
+  int hashlen=100;
+  Student** table;
+  int indexinator(int id, int hashlen); //I should get bonus points for my Phineas&Ferb refrence
 };
 
+#endif
