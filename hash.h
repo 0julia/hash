@@ -18,7 +18,7 @@ public:
 private:
   int hashlen=100;
   Student** table;
-  int indexinator(int id, int hashlen); //I should get bonus points for my Phineas&Ferb refrence
+  int indexinator(int id);//, int hashlen); //I should get bonus points for my Phineas&Ferb refrence
 };
 
 #endif
