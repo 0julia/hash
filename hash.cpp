@@ -27,6 +27,7 @@ int hash::indexinator(int id){//, int hashlen){ //do I need int hashlen?? i thin
 //put the node at that index
 void hash::addNode(Student* s){
   //look at the index it should be at
-  int index = indexinator(s->id)
+
+  int index = indexinator(s->id);
   //if that index is empty, just put it in
   if(
